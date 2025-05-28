@@ -1,0 +1,11 @@
+@mixin transition($args...) {
+  transition: $args;
+}
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow;
+}
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

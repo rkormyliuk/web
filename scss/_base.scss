@@ -1,0 +1,29 @@
+@import 'variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-main;
+  line-height: 1.6;
+  color: $text-color;
+  background-color: $background-color;
+  background-image: linear-gradient(to bottom right, #f3e5f5, #4c579e);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: $font-main;
+}
+
+button, input[type="submit"] {
+  font-family: $font-main;
+}
+
+.hidden {
+  display: none !important;
+}

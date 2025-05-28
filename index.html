@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playlist Creator</title>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Main compiled CSS -->
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-music"></i> Playlist Creator</h1>
+    </header>
+    <main>
+        <div class="auth-container" id="auth-container">
+            <div id="login-register-container">
+                <div class="tabs">
+                    <div class="tab active" onclick="showTab('login')">Login</div>
+                    <div class="tab" onclick="showTab('register')">Register</div>
+                </div>
+                <div id="login-form" class="auth-form">
+                    <h2>Welcome Back</h2>
+                    <input type="email" id="login-email" placeholder="Email" required />
+                    <input type="password" id="login-password" placeholder="Password" required />
+                    <button onclick="login()"><i class="fas fa-sign-in-alt"></i> Login</button>
+                </div>
+                <div id="register-form" class="auth-form hidden">
+                    <h2>Create Account</h2>
+                    <input type="text" id="register-username" placeholder="Username" required />
+                    <input type="email" id="register-email" placeholder="Email" required />
+                    <input type="password" id="register-password" placeholder="Password" required />
+                    <button onclick="register()"><i class="fas fa-user-plus"></i> Register</button>
+                </div>
+            </div>
+            <div id="user-container" class="hidden">
+                <div class="user-info">
+                    <div class="user-avatar" id="user-avatar"></div>
+                    <span id="username-display"></span>
+                </div>
+                <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+
+            <!-- === API DEMO SECTION === -->
+            <div id="api-demo-section" style="margin: 2rem 0;">
+                <h2>External API Demos</h2>
+                <!-- Weather -->
+                <div style="margin-bottom: 1.5rem;">
+                    <h3>Weather (Open-Meteo)</h3>
+                    <input type="text" id="weather-city" placeholder="Enter city (e.g. Kyiv)" />
+                    <button onclick="showWeather()">Show Weather</button>
+                    <div id="weather-result"></div>
+                </div>
+                <!-- Deezer Tracks -->
+                <div style="margin-bottom: 1.5rem;">
+                    <h3>Top Tracks (Deezer)</h3>
+                    <button onclick="showTopTracks()">Show Top Tracks</button>
+                    <div id="deezer-result"></div>
+                    <input type="text" id="deezer-search" placeholder="Search track" />
+                    <button onclick="searchDeezer()">Search</button>
+                    <div id="deezer-search-result"></div>
+                </div>
+                <!-- Countries -->
+                <div>
+                    <h3>Countries (REST Countries)</h3>
+                    <button onclick="showCountries()">Show Countries</button>
+                    <div id="countries-result" style="max-height:200px;overflow:auto;"></div>
+                    <input type="text" id="country-search" placeholder="Search country" />
+                    <button onclick="searchCountry()">Search</button>
+                    <div id="country-search-result"></div>
+                </div>
+            </div>
+            <!-- === END API SECTION === -->
+
+            <!-- ========== WebSocket CHAT SECTION ========== -->
+            <div id="websocket-chat-section" style="margin:2rem 0; border:1px solid #e0e0e0; border-radius:10px; background:#f8f9fa; padding:1.2rem;">
+                <h2 style="margin-bottom:0.7rem"><i class="fas fa-comments"></i> Real-time WebSocket Chat Demo</h2>
+                <div id="ws-messages" style="min-height:80px; max-height:140px; overflow-y:auto; background:#fff; border-radius:7px; border:1px solid #ccc; padding:0.7rem; margin-bottom:0.7rem;"></div>
+                <input type="text" id="ws-input" placeholder="Type a message..." style="width:75%; padding:0.5rem; border-radius:6px; border:1px solid #ccc;" />
+                <button id="ws-send" style="padding:0.5rem 1.2rem; border-radius:6px; border:none; background:#6200ea; color:#fff; font-weight:600; margin-left:8px;">Send</button>
+                <div id="ws-status" style="margin-top:0.5rem; font-size:0.88em; color:#6200ea;"></div>
+            </div>
+            <!-- ========== END WebSocket CHAT ========== -->
+
+            <!-- Featured Section for Top Songs -->
+            <div class="featured-section hidden" id="featured-section">
+                <h3 class="featured-title"><i class="fas fa-crown"></i> Top Songs This Week</h3>
+                <div class="featured-container"></div>
+                <!-- Music Visualizer -->
+                <div class="visualizer-container">
+                    <div class="visualizer" id="visualizer"></div>
+                </div>
+            </div>
+        </div>
+        <div class="playlist-container hidden" id="playlist-container">
+            <div class="playlist-form container">
+                <h2>Create New Playlist</h2>
+                <input type="text" id="playlist-name" placeholder="Playlist Name" required />
+                <select id="playlist-visibility">
+                    <option value="private">Private</option>
+                    <option value="public">Public</option>
+                </select>
+                <div class="input-group">
+                    <input type="text" id="song-name" placeholder="Song Name" />
+                    <input type="text" id="song-artist" placeholder="Artist" />
+                    <button onclick="addSongToNewPlaylist()"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <ul id="new-playlist-songs" class="song-list"></ul>
+                <button onclick="createPlaylist()"><i class="fas fa-save"></i> Create Playlist</button>
+            </div>
+            <div class="tabs">
+                <div class="tab active" onclick="showPlaylistTab('my')">My Playlists</div>
+                <div class="tab" onclick="showPlaylistTab('public')">Public Playlists</div>
+            </div>
+            <div id="my-playlists-container" class="playlist-list">
+                <h2>My Playlists</h2>
+                <div id="my-playlists"></div>
+            </div>
+            <div id="public-playlists-container" class="playlist-list hidden">
+                <h2>Public Playlists</h2>
+                <div id="public-playlists"></div>
+            </div>
+            <div id="users-list"></div>
+            <div id="add-user-form">
+                <input type="text" id="new-user-name" placeholder="Name" required />
+                <input type="email" id="new-user-email" placeholder="Email" required />
+                <button onclick="handleAddUser()">Add User</button>
+            </div>
+        </div>
+    </main>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

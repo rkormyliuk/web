@@ -1,0 +1,60 @@
+@import 'variables';
+@import 'mixins';
+
+// Header
+header {
+  background-color: $primary-color;
+  color: #fff;
+  padding: 0.5rem;
+  text-align: center;
+  box-shadow: $shadow;
+  position: relative;
+  overflow: hidden;
+
+  h1 {
+    font-weight: 100;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.container {
+  background-color: $card-color;
+  border-radius: $border-radius;
+  @include box-shadow($shadow);
+  padding: 2rem;
+  @include transition($transition);
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    transform: translateY(-5px);
+  }
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+.playlist-container {
+  flex: 1;
+  min-width: 350px;
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 0 1rem;
+  }
+}

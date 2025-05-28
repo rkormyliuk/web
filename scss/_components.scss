@@ -1,0 +1,536 @@
+@import 'variables';
+@import 'mixins';
+
+// AUTH FORM
+.auth-form {
+  padding: 1.5rem;
+  border-radius: $border-radius;
+  background-color: $card-color;
+  @include box-shadow($shadow);
+  @include transition($transition);
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+}
+
+h2 {
+  color: $primary-color;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 3px;
+    background-color: $primary-light;
+    border-radius: 3px;
+  }
+}
+
+// Playlist Item
+.playlist-item {
+  margin-bottom: 1.5rem;
+  padding: 1.2rem;
+  border-radius: $border-radius;
+  background-color: $card-color;
+  @include box-shadow(0 2px 8px rgba(0,0,0,0.05));
+  @include transition($transition);
+  border-left: 4px solid $primary-color;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background-image: url('https://cdn.pixabay.com/photo/2016/08/15/16/48/vinyl-1595847_1280.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.05;
+    border-radius: 50%;
+    transform: translate(30%, 30%);
+    z-index: 0;
+  }
+
+  &:hover {
+    box-shadow: $shadow;
+    transform: translateY(-3px);
+  }
+
+  h3 {
+    margin-top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $primary-color;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// Song List
+.song-list {
+  list-style-type: none;
+  padding: 0.8rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.song-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 0.8rem;
+  margin-bottom: 0.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  @include transition($transition);
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    background-color: #f0f0f0;
+    transform: translateX(5px);
+  }
+}
+
+.song-info {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.song-icon {
+  margin-right: 0.8rem;
+  color: $primary-light;
+}
+
+// Buttons
+button,
+input[type="submit"] {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  @include transition($transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+  &:hover {
+    background-color: $primary-dark;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(98, 0, 234, 0.2);
+  }
+}
+
+.btn-danger {
+  background-color: $danger-color;
+
+  &:hover {
+    background-color: #d32f2f;
+    box-shadow: 0 4px 8px rgba(244, 67, 54, 0.2);
+  }
+}
+
+.btn-success {
+  background-color: $success-color;
+
+  &:hover {
+    background-color: #388e3c;
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.2);
+  }
+}
+
+// Forms
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: $font-main;
+  font-size: 0.95rem;
+  @include transition($transition);
+  background-color: #fff;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-light;
+    box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.2);
+  }
+}
+
+// Badge
+.badge {
+  background-color: $primary-color;
+  color: white;
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  &.private {
+    background-color: $danger-color;
+  }
+  &.public {
+    background-color: $success-color;
+  }
+}
+
+// Tabs
+.tabs {
+  display: flex;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+.tab {
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  position: relative;
+  font-weight: 500;
+  color: $text-light;
+  @include transition($transition);
+
+  &:hover {
+    color: $primary-color;
+  }
+  &.active {
+    color: $primary-color;
+    font-weight: 600;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: $primary-color;
+      border-radius: 3px 3px 0 0;
+    }
+  }
+}
+
+// User Info
+.user-info {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #e8eaf6;
+  border-radius: 30px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: $primary-dark;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: $primary-color;
+  color: white;
+  border-radius: 50%;
+  @include flex-center;
+  margin-right: 0.8rem;
+  font-size: 0.9rem;
+}
+
+// Input Group
+.input-group {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+
+  input {
+    flex: 1;
+    margin-bottom: 0;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: $text-light;
+
+  i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #ddd;
+  }
+}
+
+// Creator Info
+.creator-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: $text-light;
+
+  .creator-avatar {
+    width: 24px;
+    height: 24px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    @include flex-center;
+    margin-right: 0.5rem;
+    font-size: 0.7rem;
+    color: $text-color;
+  }
+}
+
+// ----------------- Top Songs This Week ----------------
+
+.featured-section {
+  width: 100%;
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.featured-title {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: $primary-color;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  i {
+    color: #FFD700;
+  }
+}
+
+.featured-container {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: $primary-light transparent;
+}
+
+.top-song {
+  min-width: 160px;
+  max-width: 160px;
+  background-color: $card-color;
+  border-radius: $border-radius;
+  @include box-shadow($shadow);
+  overflow: hidden;
+  @include transition($transition);
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  }
+}
+
+.top-song-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  display: block;
+}
+
+.top-song-info {
+  padding: 1rem;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top-song-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.top-song-artist {
+  font-size: 0.8rem;
+  color: $text-light;
+}
+.top-song-rank {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-weight: 600;
+  font-size: 0.8rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  @include flex-center;
+}
+
+.top-song-plays {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  color: $text-light;
+  margin-top: 0.5rem;
+}
+
+// Responsive для mobile
+@media (max-width: 768px) {
+  .playlist-item {
+    padding: 1rem;
+  }
+  .input-group {
+    flex-direction: column;
+
+    input,
+    button {
+      width: 100%;
+    }
+  }
+  .featured-container {
+    gap: 0.7rem;
+  }
+  .top-song {
+    min-width: 120px;
+    max-width: 120px;
+  }
+  .top-song-image {
+    height: 80px;
+  }
+}
+
+// Visualizer styles
+.visualizer-container {
+  width: 100%;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: $border-radius;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.visualizer {
+  display: flex;
+  align-items: flex-end;
+  height: 40px;
+  width: 100%;
+  padding: 0 1rem;
+  gap: 3px;
+}
+
+.visualizer-bar {
+  background: linear-gradient(to top, $primary-color, $primary-light);
+  border-radius: 2px 2px 0 0;
+  width: 4px;
+  height: 5px;
+  animation: visualize 1.3s infinite ease-in-out alternate;
+}
+
+// Анімація для візуалізатора
+@keyframes visualize {
+  0% {
+    height: 5px;
+  }
+  100% {
+    height: var(--height);
+  }
+}
+
+// Для кожної bar різна висота та затримка:
+.visualizer-bar:nth-child(1) { --height: 15px; animation-delay: -0.4s; }
+.visualizer-bar:nth-child(2) { --height: 25px; animation-delay: -0.3s; }
+.visualizer-bar:nth-child(3) { --height: 35px; animation-delay: -0.2s; }
+.visualizer-bar:nth-child(4) { --height: 15px; animation-delay: -0.5s; }
+.visualizer-bar:nth-child(5) { --height: 25px; animation-delay: -0.6s; }
+.visualizer-bar:nth-child(6) { --height: 35px; animation-delay: -0.3s; }
+.visualizer-bar:nth-child(7) { --height: 20px; animation-delay: -0.7s; }
+.visualizer-bar:nth-child(8) { --height: 30px; animation-delay: -0.5s; }
+.visualizer-bar:nth-child(9) { --height: 15px; animation-delay: -0.3s; }
+.visualizer-bar:nth-child(10) { --height: 25px; animation-delay: -0.6s; }
+.visualizer-bar:nth-child(11) { --height: 35px; animation-delay: -0.2s; }
+.visualizer-bar:nth-child(12) { --height: 20px; animation-delay: -0.4s; }
+.visualizer-bar:nth-child(13) { --height: 30px; animation-delay: -0.3s; }
+.visualizer-bar:nth-child(14) { --height: 15px; animation-delay: -0.6s; }
+.visualizer-bar:nth-child(15) { --height: 25px; animation-delay: -0.4s; }
+.visualizer-bar:nth-child(16) { --height: 35px; animation-delay: -0.3s; }
+.visualizer-bar:nth-child(17) { --height: 20px; animation-delay: -0.7s; }
+.visualizer-bar:nth-child(18) { --height: 30px; animation-delay: -0.2s; }
+.visualizer-bar:nth-child(19) { --height: 15px; animation-delay: -0.5s; }
+.visualizer-bar:nth-child(20) { --height: 25px; animation-delay: -0.3s; }
+.visualizer-bar:nth-child(21) { --height: 35px; animation-delay: -0.6s; }
+.visualizer-bar:nth-child(22) { --height: 20px; animation-delay: -0.4s; }
+.visualizer-bar:nth-child(23) { --height: 30px; animation-delay: -0.2s; }
+.visualizer-bar:nth-child(24) { --height: 15px; animation-delay: -0.7s; }
+.visualizer-bar:nth-child(25) { --height: 25px; animation-delay: -0.3s; }
+.visualizer-bar:nth-child(26) { --height: 35px; animation-delay: -0.5s; }
+.visualizer-bar:nth-child(27) { --height: 20px; animation-delay: -0.4s; }
+.visualizer-bar:nth-child(28) { --height: 30px; animation-delay: -0.6s; }
+.visualizer-bar:nth-child(29) { --height: 15px; animation-delay: -0.3s; }
+.visualizer-bar:nth-child(30) { --height: 25px; animation-delay: -0.2s; }
+.visualizer-bar:nth-child(31) { --height: 35px; animation-delay: -0.5s; }
+.visualizer-bar:nth-child(32) { --height: 20px; animation-delay: -0.4s; }
+.visualizer-bar:nth-child(33) { --height: 30px; animation-delay: -0.7s; }
+.visualizer-bar:nth-child(34) { --height: 15px; animation-delay: -0.3s; }
+.visualizer-bar:nth-child(35) { --height: 25px; animation-delay: -0.6s; }
+.visualizer-bar:nth-child(36) { --height: 35px; animation-delay: -0.4s; }
+.visualizer-bar:nth-child(37) { --height: 20px; animation-delay: -0.2s; }
+.visualizer-bar:nth-child(38) { --height: 30px; animation-delay: -0.5s; }
+.visualizer-bar:nth-child(39) { --height: 15px; animation-delay: -0.3s; }
+.visualizer-bar:nth-child(40) { --height: 25px; animation-delay: -0.6s; }
+.visualizer-bar:nth-child(41) { --height: 35px; animation-delay: -0.5s; }
+.visualizer-bar:nth-child(42) { --height: 20px; animation-delay: -0.4s; }
+.visualizer-bar:nth-child(43) { --height: 30px; animation-delay: -0.7s; }
+.visualizer-bar:nth-child(44) { --height: 15px; animation-delay: -0.3s; }
+.visualizer-bar:nth-child(45) { --height: 25px; animation-delay: -0.6s; }
+.visualizer-bar:nth-child(46) { --height: 35px; animation-delay: -0.4s; }
+.visualizer-bar:nth-child(47) { --height: 20px; animation-delay: -0.2s; }
+.visualizer-bar:nth-child(48) { --height: 30px; animation-delay: -0.5s; }
+.visualizer-bar:nth-child(49) { --height: 15px; animation-delay: -0.3s; }
+.visualizer-bar:nth-child(50) { --height: 25px; animation-delay: -0.6s; }
+
+
+// Responsive (більш компактно на mobile)
+@media (max-width: 768px) {
+  .visualizer {
+    gap: 2px;
+  }
+  .visualizer-bar {
+    width: 3px;
+  }
+}
